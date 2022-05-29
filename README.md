@@ -1,0 +1,1 @@
+<h1>Django Platzi</h1>
