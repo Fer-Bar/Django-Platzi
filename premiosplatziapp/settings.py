@@ -29,7 +29,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["127.0.0.1", ".herokuapp.com"]
 
-
+# Static Files
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls.apps.PollsConfig'
+    'polls.apps.PollsConfig',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'premiosplatziapp.urls'
@@ -135,3 +138,6 @@ CSRF_COOKIE_SECURE              = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
 SECURE_HSTS_SECONDS             = 1000000
 SECURE_FRAME_DENY               = True
+
+# Whitenoise config
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
