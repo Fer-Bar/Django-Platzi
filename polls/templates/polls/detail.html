@@ -1,25 +1,46 @@
-<form action="{% url 'polls:vote' question.id %}" method="post">
-  {% csrf_token %}
-  <fieldset>
-    <legend>
-      <h1>{{question.question_text}}</h1>
-    </legend>
-    {% if error_message %}
-      <p><strong>{{error_message}}</strong></p>
-    {% endif %}
-    {% for choice in question.choice_set.all %}
-      <input type="radio" 
-             name="choice" 
-             id="choice-{{forloop.counter}}"
-             value="{{choice.id}}"
-             required
-      >
-      <label for="choice-{{forloop.counter}}">
-        {{choice.choice_text}}
-      </label>
-      <br>
-    {% endfor %}
-    
-  </fieldset>
-<input type="submit" value="Vote">
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'polls/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'polls/css/detail.css' %}">
+  <link rel="stylesheet" href="{% static 'polls/css/results.css' %}">
+  <title>{{question.question_text}}</title>
+</head>
+<body>
+  <form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+      <legend>
+        <h1>{{question.question_text}}</h1>
+      </legend>
+      {% if error_message %}
+        <p><strong>{{error_message}}</strong></p>
+      {% endif %}
+      {% for choice in question.choice_set.all %}
+        <input type="radio" 
+               name="choice" 
+               id="choice-{{forloop.counter}}"
+               value="{{choice.id}}"
+               required
+        >
+        <label for="choice-{{forloop.counter}}">
+          {{choice.choice_text}}
+        </label>
+        <br>
+      {% endfor %}
+    </fieldset>
+  <input type="submit" value="Vote">
+  </form>
+  <br>
+  <a class="fcc-btn" style="background-color: transparent !important;border: 1px solid white;" 
+  href="{% url 'polls:index' %}">
+  Back to the Home Page
+  </a>
+</body>
+</html>
+
+

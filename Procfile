@@ -1,0 +1,1 @@
+web: gunicorn premiosplatziapp.wsgi
